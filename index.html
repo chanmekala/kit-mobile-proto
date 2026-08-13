@@ -3,9 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Kit · Log Moment</title>
+
+<!-- add to home screen -->
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>Kit · Log Moment</title>
+<meta name="apple-mobile-web-app-title" content="Kit">
+<meta name="theme-color" content="#181A1B">
+<link rel="apple-touch-icon" href="assets/icon-180.png">
+<link rel="manifest" href="manifest.webmanifest">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -25,7 +32,7 @@
     </header>
 
     <div class="hero">
-      <h1 id="hello">Hello Coach Emma<span id="hello-comma" class="dim">,</span></h1>
+      <h1 id="hello">Hello Coach Emma<span id="hello-comma">,</span></h1>
       <div id="summary">
         <p class="s-line" id="s1"><span class="dim">You have</span> 6 players <span class="dim">on your watchlist today.</span></p>
         <p class="s-line" id="s2">
@@ -40,7 +47,6 @@
       </div>
     </div>
 
-    <!-- draggable sheet: bg only materialises as it is pulled down -->
     <div id="sheet">
       <div id="sheet-bg"></div>
       <div class="grabber" id="sheet-grabber"></div>
@@ -48,9 +54,12 @@
         <div id="timeline-inner">
 
           <div class="t-group">
-            <div class="t-rail"><span class="t-label live">LIVE</span><span class="t-count">02</span><span class="t-dot"></span><span class="t-line"></span></div>
+            <div class="t-rail">
+              <div class="t-marker"><span class="t-label live">LIVE</span><span class="t-count">02</span></div>
+              <span class="t-dot"></span><span class="t-line"></span>
+            </div>
             <div class="t-cards">
-              <div class="match-card live-card" id="card-field7">
+              <div class="match-card" id="card-field7">
                 <div class="mc-row">
                   <div class="mc-team"><img src="assets/crest-ga.png" alt=""><span>GA Aspire</span></div>
                   <div class="mc-mid"><b>9:45 AM</b><span>FIELD 7</span></div>
@@ -61,7 +70,7 @@
                   <span class="mc-watch-names">Julia · Sam · Jordan</span>
                 </div>
               </div>
-              <div class="match-card live-card">
+              <div class="match-card">
                 <div class="mc-row">
                   <div class="mc-team"><img src="assets/crest-car.png" alt=""><span>Carolina ECNL</span></div>
                   <div class="mc-mid"><b>10:30 AM</b><span>FIELD 2</span></div>
@@ -75,24 +84,27 @@
             </div>
           </div>
 
-          <div class="t-group">
-            <div class="t-rail"><span class="t-label">UP NEXT</span><span class="t-count">03</span><span class="t-dot"></span><span class="t-line"></span></div>
+          <div class="t-group dim">
+            <div class="t-rail">
+              <div class="t-marker"><span class="t-label">UP NEXT</span><span class="t-count">03</span></div>
+              <span class="t-dot"></span><span class="t-line"></span>
+            </div>
             <div class="t-cards">
-              <div class="match-card dim-card">
+              <div class="match-card">
                 <div class="mc-row">
                   <div class="mc-team"><img src="assets/crest-str.png" alt=""><span>Strikers</span></div>
                   <div class="mc-mid"><b>11:00 AM</b><span>FIELD 2</span></div>
                   <div class="mc-team"><img src="assets/crest-ecl.png" alt=""><span>Eclipse</span></div>
                 </div>
               </div>
-              <div class="match-card dim-card">
+              <div class="match-card">
                 <div class="mc-row">
                   <div class="mc-team"><img src="assets/crest-car.png" alt=""><span>West Coast FC</span></div>
                   <div class="mc-mid"><b>12:30 PM</b><span>FIELD 13</span></div>
                   <div class="mc-team"><img src="assets/crest-vu.png" alt=""><span>Solar</span></div>
                 </div>
               </div>
-              <div class="match-card dim-card">
+              <div class="match-card">
                 <div class="mc-row">
                   <div class="mc-team"><img src="assets/crest-car.png" alt=""><span>West Coast FC</span></div>
                   <div class="mc-mid"><b>1:20 PM</b><span>FIELD 14</span></div>
@@ -102,13 +114,16 @@
             </div>
           </div>
 
-          <div class="t-group">
-            <div class="t-rail"><span class="t-label">DONE</span><span class="t-count">01</span><span class="t-dot"></span></div>
+          <div class="t-group dim">
+            <div class="t-rail">
+              <div class="t-marker"><span class="t-label">DONE</span><span class="t-count">01</span></div>
+              <span class="t-dot"></span>
+            </div>
             <div class="t-cards">
-              <div class="match-card dim-card">
+              <div class="match-card">
                 <div class="mc-row">
                   <div class="mc-team"><img src="assets/crest-str.png" alt=""><span>LA Surf</span></div>
-                  <div class="mc-mid"><b>8:00 AM</b><span class="ecnl">ECNL</span></div>
+                  <div class="mc-mid"><b>8:00 AM</b><span>ECNL</span></div>
                   <div class="mc-team"><img src="assets/crest-ecl.png" alt=""><span>Colorado Rapids</span></div>
                 </div>
               </div>
@@ -145,7 +160,7 @@
     </div>
 
     <div class="log-panel">
-      <div class="lp-live"><i></i>LIVE · <em id="min-b">34</em>’ <span class="lp-player" id="lp-player">Julia Smith</span></div>
+      <div class="lp-live">LIVE · <em id="min-b">34</em>’</div>
       <div class="chips" id="chips">
         <button class="chip">Shot</button>
         <button class="chip">Duel</button>
@@ -162,7 +177,7 @@
     </div>
   </section>
 
-  <!-- ============ ADD PLAYER SHEET ============ -->
+  <!-- ============ ADD PLAYER ============ -->
   <div id="modal-scrim"></div>
   <div id="add-sheet">
     <div class="grabber"></div>

@@ -42,14 +42,14 @@ const helloComma = document.getElementById("hello-comma");
 const timelineEl = document.querySelector(".timeline");
 const inner = document.getElementById("timeline-inner");
 
-const SHEET_UP = 196;        // collapsed: sheet sits under "Hello Coach Emma"
-let SHEET_DOWN = 460;        // open: full summary revealed (measured below)
+const SHEET_UP = 216;        // Figma frame 2537:16712 — sheet rests here
+let SHEET_DOWN = 570;        // Figma — fully-revealed summary
 
 function layoutSheet() {
   summary.style.visibility = "hidden";
   gsap.set(summary, { autoAlpha: 1 });
   const heroBottom = summary.getBoundingClientRect().bottom - phone.getBoundingClientRect().top;
-  SHEET_DOWN = Math.min(heroBottom + 26, phone.clientHeight - 200);
+  SHEET_DOWN = Math.min(Math.max(heroBottom + 16, 570), phone.clientHeight - 200);
   gsap.set(summary, { clearProps: "all" });
   summary.style.visibility = "hidden";
 }
@@ -266,7 +266,7 @@ document.querySelectorAll(".av-cluster[data-players]").forEach(cluster => {
 function retargetOpenSheet() {
   if (!sheetOpen) return;
   const heroBottom = summary.getBoundingClientRect().bottom - phone.getBoundingClientRect().top;
-  SHEET_DOWN = Math.min(heroBottom + 26, phone.clientHeight - 150);
+  SHEET_DOWN = Math.min(Math.max(heroBottom + 16, 570), phone.clientHeight - 150);
   rawSheetY = SHEET_DOWN;
   gsap.to(sheet, { y: SHEET_DOWN, duration: 0.45, ease: "power3.out",
     onComplete() { setContentY(contentY); } });
@@ -306,23 +306,23 @@ const PLAYERS = [
 ];
 const carousel = document.getElementById("carousel");
 const dots = document.getElementById("dots");
-const lpPlayer = document.getElementById("lp-player");
 let selectedIdx = 0;
 
+/* Figma player card: 156×208, avatar 44, divider, three 61pt metric pairs */
 function cardHTML(p, i) {
   const photo = p.img ? `<img src="${p.img}" alt="">` : `<span class="p-sil">${p.jersey}</span>`;
+  const pair = (l1, v1, l2, v2) => `<div class="p-pair">
+      <div class="p-cell"><span>${l1}</span><b>${v1}</b></div>
+      <div class="p-cell"><span>${l2}</span><b>${v2}</b></div>
+    </div>`;
   return `<div class="p-card${i === selectedIdx ? " selected" : ""}" data-i="${i}">
     <div class="p-head">${photo}
       <div><div class="p-name">${p.name}</div><div class="p-pos">${p.pos}</div></div>
     </div>
-    <div class="p-grid">
-      <div class="p-cell"><span>GRAD</span><b>${p.grad}</b></div>
-      <div class="p-cell"><span>GPA</span><b>${p.gpa}</b></div>
-      <div class="p-cell"><span>HEIGHT</span><b>${p.height}</b></div>
-      <div class="p-cell"><span>JERSEY</span><b>${p.jersey}</b></div>
-      <div class="p-cell"><span>HS</span><b>${p.hs}</b></div>
-      <div class="p-cell"><span>POSITION</span><b>${p.position}</b></div>
-    </div>
+    <div class="p-divider"></div>
+    ${pair("GRAD", p.grad, "GPA", p.gpa)}
+    ${pair("HEIGHT", p.height, "JERSEY", p.jersey)}
+    ${pair("HS", p.hs, "POSITION", p.position)}
   </div>`;
 }
 function renderCarousel() {
@@ -338,8 +338,6 @@ function selectPlayer(i) {
   haptic(6);
   carousel.querySelectorAll(".p-card").forEach((el, j) => el.classList.toggle("selected", j === i));
   dots.querySelectorAll("i").forEach((el, j) => el.classList.toggle("on", j === i));
-  lpPlayer.textContent = PLAYERS[i].name;
-  gsap.fromTo(lpPlayer, { y: 6, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.3, ease: "power2.out" });
 }
 renderCarousel();
 
